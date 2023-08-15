@@ -1,0 +1,91 @@
+#include<stdlib.h>
+
+#include<stdio.h>
+
+#include<unistd.h>
+
+#include<pthread.h>
+
+
+
+pthread_t threadid1, threadid2;
+
+
+
+void display_alive(int threadid){
+
+	while(1){
+
+		printf("\n %d Thread alive\n", threadid);
+
+		sleep(5);
+
+	}
+
+	
+
+}
+
+
+
+void* thread1(void* arg){
+
+
+
+	printf("\n thread1: %d\n",*(int*)arg);
+
+	printf("\nThread1 running\n");
+
+	//pthread_exit(NULL);
+
+	display_alive(1);
+
+	//pthread_exit(NULL);
+
+}
+
+
+
+void* thread2(void* arg){
+
+	
+
+	printf("\n thread2: %d\n",*(int*)arg);
+
+	printf("\nThread2 running\n");
+
+	//pthread_exit(NULL);
+
+	display_alive(2);
+
+}
+
+
+
+int main(){
+
+
+
+	pthread_create(&threadid1, NULL, thread1,&threadid1);
+
+	pthread_create(&threadid2, NULL, thread2,&threadid2);
+
+	
+
+	pthread_detach(threadid1);
+
+	pthread_detach(threadid2);
+
+	//pthread_join(threadid1,NULL);
+
+	//pthread_join(threadid2,NULL);
+
+	display_alive(0);
+
+		
+
+	
+
+	return 0;
+
+}

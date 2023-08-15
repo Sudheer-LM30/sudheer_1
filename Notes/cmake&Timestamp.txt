@@ -1,0 +1,16 @@
+CMAKE:
+
+makefiles- it provides a build system which can be used to manage and clean the programs.
+cmake- it is a cross platform makefile generator, it automatically generates the makefiles for our projects. 
+
+TIMESTAMP:
+*The main use of touch command is to access,change and modify the time of the file.
+stat filename
+cat filename(visits the filename)
+echo "newline" >> filename(adds newdata to the file)
+(change- it actually refers to which the metadata related to the file was changed like when the file permissions were changed (ls -l))
+touch -a filename(add current time whenever we use the command(accessing))
+touch -m filename(for modifying)
+touch filename1 -r filename2(refer 1 with 2)
+we cant change the timestamp for(change),(we can change by changing system time)
+

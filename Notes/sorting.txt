@@ -1,0 +1,24 @@
+*SORTING: SOFRTING IS NOTHING BUT REARRANGING THE ELEMENTS IN AN ARRAY IN SOME LOGICAL ORDER LIKE L TO H OR H TO L.
+	 .IF WE SORT AN UNSORTED ARRAY THEN ITS BECOME EASIER TO SOLVE SOME FUNCTIONALITIES LIKE IT WILL BECOME EASY TO FIND MINIMUM AMD MAXIMUM NUMBER IN THE ARRAY AFTER SORTING.
+
+1.QUICK SORT : MOST OF THE PEOPLE USE QUICK SORT BECAUSE IT IS SOMEWHAT EASY AND THE MOST EFFICIENT SORTING ALGORITHM.
+	       It works on the divide and conquer approach, i.e., the array is divided into subarrays, and when these subarrays are sorted,
+	       they are combined to form a complete sorted array.
+
+2.MERGE SORT : This is another technique that uses the “Divide and conquer” strategy. In this technique, we divide the list first into equal halves.
+	       Then we perform merge sort technique on these lists independently so that both the lists are sorted.
+	       Finally, we merge both the lists to get a complete sorted list.
+	       Merge sort and quick sort are faster than most other sorting techniques.
+
+3.SELECTION SORT : SELECTION SORT IS AN IN-PLACE COMPARISION SORT.
+		  IN SELECTION SORT WE ARE MAINTAINING THE THE UNSORTED ARRAY IN TO TWO PARTS,
+		  ONE SUB ARRAY WILL HAVE THE ELEMENTS SORTED WHICH WE CAN ALSO CALLED SORTED SUBARRAY AND THE OTHER SUB ARRAY HAVE UNSORTED ELEMENTS WHICH NEEDS TO BE SORTED.
+		  INITIALLY THE SORTED SUBARRAY IS EMPTY AND THE UNSORTED SUBARRAY HAVE THE ENTIRE INPUT.
+		  WHAT WE ARE DOING IS INITIALLY WE NEED TO FIND THE SMALLEST OR LARGEST ELEMENT,DEPENDS ON WHICH ORDER WE WANT.
+
+4.INSERTION SORT : In this sorting technique, the elements are sorted by comparing the elements with their previous elements. 
+		   It starts by comparing the second element with the first element. 
+		   If the second element is smaller than the first, then we will swap it.
+
+5.BUBBLE SORT : Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in the wrong order.
+	        This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.

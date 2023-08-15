@@ -1,0 +1,354 @@
+30.DESIGN PATTERNS: DESIGN PATTERNS ARE TYPICAL SOLUTIONS TO COMMONLY OCCURRING PROBLEMS.
+		    .THEY ARE LIKE PRE-MADE BLUEPRINTS THAT YOU CAN CUSTOMIZE for SOLVING A PROBLEM.
+					
+*THERE ARE THREE TYPES :
+
+1.CREATIONAL - CREATIONAL DESIGN PATTERNS WILL ACTUALLY PROVIDE DIFFERNET TYPES OF OBJECT CREATIONS WHICH WILL ACTUALLY RESULTS IN GREAT FLEXIBILITY AND WE CAN REUSE THE CODE AGAIN AND AGAIN.
+
+*SINGLETON: SINGLETON IS A CREATIONAL DESIGN PATTERN WHICH LET US HAVE ONLY ONE OBJECT IN THE PROGRAM AND PROVIDES GLOBAL ACCESS.
+	   .IT ENSURES THAT A CLASS HAS ONLY ONE INSTANCE
+	   .PROVIDE GLOBAL ACCESS POINT TO THE INSTANCE
+	   .MAKE THE DEFAULT CONSTRUCTOR PRIVATE TO PREVENT OTHER OBJECTS FROM USING NEW OPERATOR.
+	   .WE HAVE TO CREATE A STATIC METHOD WHICH CALLS THE PRIVATE CONSTRUCTOR.
+           .CONTROL ACCESSING TO SOME SHARED RESOURCE LIKE DATA BASE
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+CODE:
+
+#include <iostream>
+using namespace std;
+class MySingleton 
+{
+private:
+        MySingleton() 
+        {
+             i = 10;
+            cout<<"Singleton constructor"<<endl;
+        }
+        MySingleton(const MySingleton&) = delete;
+        MySingleton& operator=(const MySingleton&) = delete;
+        static MySingleton* ptr;    
+    
+public:
+         int i;
+         
+         static MySingleton* getInstance()
+         {
+             if(ptr == NULL)
+             {
+                ptr = new MySingleton();
+             }
+
+             return ptr;
+         }
+         
+         ~MySingleton()
+          {
+              delete ptr;
+          }
+             
+         
+
+};
+
+ MySingleton* MySingleton::ptr = nullptr;    
+
+int main() 
+{
+
+MySingleton* FirstPtr = MySingleton::getInstance();
+cout<<"Default value of i = "<<FirstPtr->i<<endl;
+
+MySingleton* SecondPtr = MySingleton::getInstance();
+FirstPtr->i = 20;
+cout<<"Changed the value of i using 'FirstPtr' however accesing vlue of i by SecondPtr = " 
+    <<SecondPtr->i<<endl;
+    
+return 0;
+
+}
+
+_______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+*FACTORY METHOD: Factory Method is a creational design pattern which actually provides an interface for creating the objects in a superclass, but the subclasses will decide which classes to instantiate.
+	        .when we will use this factory method is when you dont know exactly how many dependencies you are going to work with,
+		.we also use this method in order to extend the functionality of your libaries for the client.
+		.the main advantage of this factory method is to avoid tight coupling between your clients and concrete classes.
+		.we can also add new products to the code without changing the client code.
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+code:
+
+#include <iostream>
+using namespace std;
+/* enum is used as  indicator to decide which cake you want*/
+enum cakeType{choc,vanila};
+
+class Cake
+{
+    public:
+    virtual void recipe() = 0;
+};
+
+class ChoclateCake:public Cake
+{
+    public:
+    void recipe()
+    {
+        cout<<"choclate"<<endl;
+    }
+};
+
+class VanilaCake:public Cake
+{
+    public:
+    void recipe()
+    {
+        cout<<"Vanila"<<endl;
+    }
+};
+
+class factory
+{
+    private:
+    enum cakeType TypeOfCake;
+    static Cake *obj;
+    public:
+     
+    factory()
+    {
+       cout<<"Constructor"<<endl;
+    }
+
+   static Cake* getIns(cakeType type)
+    {
+           if(type == choc)
+           {
+                obj = new ChoclateCake();
+           }
+           else if (type == vanila)
+           {
+                obj =  new VanilaCake();
+           }
+           
+           return obj;
+    }
+};
+
+Cake* factory::obj = nullptr;
+
+int main()
+{
+Cake* Cobj = factory::getIns(vanila);
+Cobj->recipe();
+return 0;
+
+}
+
+____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+*ABSTRACT FACTORY METHOD: ABSTRACT FACTORY IS ACTUALLY A CREATIONAL DESIGN PATTERN WHICH IS SAME AS FACTORY METHOD EXCEPT THAT WE CAN PRODUCE FAMILIES OF RELATED OBJECTS WITHOUT SPECIFING THEIR CONCRETE CLASSES.
+
+ABSTRACT FACTORY CODE:
+#include <iostream>
+using namespace std;
+
+// Abstract Product A
+class AbstractProductA {
+public:
+    virtual void operationA() = 0;
+};
+
+// Concrete Product A1
+class ConcreteProductA1 : public AbstractProductA {
+public:
+    void operationA() {
+        cout << "ConcreteProductA1: Operation A\n";
+    }
+};
+
+// Concrete Product A2
+class ConcreteProductA2 : public AbstractProductA {
+public:
+    void operationA() {
+        cout << "ConcreteProductA2: Operation A\n";
+    }
+};
+
+// Abstract Product B
+class AbstractProductB {
+public:
+    virtual void operationB() = 0;
+};
+
+// Concrete Product B1
+class ConcreteProductB1 : public AbstractProductB {
+public:
+    void operationB() {
+        cout << "ConcreteProductB1: Operation B\n";
+    }
+};
+
+// Concrete Product B2
+class ConcreteProductB2 : public AbstractProductB {
+public:
+    void operationB() {
+        cout << "ConcreteProductB2: Operation B\n";
+    }
+};
+
+// Abstract Factory
+class AbstractFactory {
+public:
+    virtual AbstractProductA* createProductA() = 0;
+    virtual AbstractProductB* createProductB() = 0;
+};
+
+// Concrete Factory 1
+class ConcreteFactory1 : public AbstractFactory {
+public:
+    AbstractProductA* createProductA() {
+        return new ConcreteProductA1();
+    }
+    
+    AbstractProductB* createProductB() {
+        return new ConcreteProductB1();
+    }
+};
+
+// Concrete Factory 2
+class ConcreteFactory2 : public AbstractFactory {
+public:
+    AbstractProductA* createProductA() {
+        return new ConcreteProductA2();
+    }
+    
+    AbstractProductB* createProductB() {
+        return new ConcreteProductB2();
+    }
+};
+
+int main() {
+    // Create a factory of type ConcreteFactory1
+    AbstractFactory* factory1 = new ConcreteFactory1();
+    
+    // Create products from factory1
+    AbstractProductA* productA1 = factory1->createProductA();
+    AbstractProductB* productB1 = factory1->createProductB();
+    
+    productA1->operationA(); // Output: ConcreteProductA1: Operation A
+    productB1->operationB(); // Output: ConcreteProductB1: Operation B
+    
+    // Create a factory of type ConcreteFactory2
+    AbstractFactory* factory2 = new ConcreteFactory2();
+    
+    // Create products from factory2
+    AbstractProductA* productA2 = factory2->createProductA();
+    AbstractProductB* productB2 = factory2->createProductB();
+    
+    productA2->operationA(); // Output: ConcreteProductA2: Operation A
+    productB2->operationB(); // Output: ConcreteProductB2: Operation B
+    
+    // Cleanup
+    delete productA1;
+    delete productB1;
+    delete productA2;
+    delete productB2;
+    delete factory1;
+    delete factory2;
+
+    return 0;
+}
+
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________					  .
+
+2.STRUCTURAL - STRUCTURAL DESIGN PATTERNS WILL ACTUALLY DEALS WITH HOW TO COMBINE OBJECTS AND CLASSES INTO LARGER STRUCTURES efficiently.
+_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+3.BEHAVIORAL - BEHAVIORAL DESIGN PATTERNS WILL ACTUALLY DEALS WITH COMMUNICATION AND RESPONSIBILITIES BETWEEN THE OBJECTS.
+		
+*OBSERVER: IT DEFINES ONE TO MANY RELATIONSHIP BETWEEN THE OBJECTS
+	 IF ONE OBJECT CHANGE ITS STATE THEN ALL OTHER OBJECTS WILL GET NOTIFIED AND UPDATED AUTOMATICALLY.
+	 EXAMPLE:YOUTUBE(SUBSCRIPTION,UNSUBSCRIPTION,GETNOTIFICATIONS)
+	 WHEN TO USE: WHEN ONE OBJECT STATE CHANGES AND MUST BE REFLECTED IN ANOTHER OBJECTS WITHOUT KEEPING THE OBJECTS TIGHTLY COUPLED
+_________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+OBSERVER CODE:
+				
+#include <iostream>
+#include <string>
+#include <vector>
+#include <list>
+#include <algorithm>
+using namespace std;
+
+class IObserver
+{
+public:
+    virtual void newUpdateShow(float price) = 0;
+};
+
+class Shop :public IObserver
+{
+    std::string name;
+    float price;
+public:
+    Shop(std::string name)
+    {
+        this->name = name;
+    }
+    void newUpdateShow(float price)
+    {
+        this->price = price;
+        std::cout << "Price at "<< name << " is now "<< price << "\n";
+    }
+};
+
+class ShopOperationSubject
+{
+   std::vector<Shop*> list;
+   std::vector<Shop*>::iterator itr;
+   public:
+      void subscribeInfo(Shop *shop)
+      {
+          list.push_back(shop);
+      }
+      void unSubscribeInfo(Shop *shop)
+      {
+         list.erase(std::remove(list.begin(), list.end(), shop), list.end());
+      }
+     void notifyInfo(float price)
+      {
+          for(vector<Shop*>::const_iterator iter = list.begin(); iter != list.end(); ++iter)
+          {
+              if(*iter != 0)
+              {
+                  (*iter)->newUpdateShow(price);
+              }
+          }
+      }
+};
+
+class UpdateProductInfo : public ShopOperationSubject
+{
+public:
+     void ChangePrice(float price)
+     {
+         notifyInfo(price);
+     }
+};
+
+int main()
+{
+    cout<<"Hello World" <<endl;
+    UpdateProductInfo product;
+    Shop shop1("Shop 1");
+    Shop shop2("Shop 2");
+    product.subscribeInfo(&shop1);
+    product.subscribeInfo(&shop2);
+    product.ChangePrice(10);
+    product.unSubscribeInfo(&shop2);
+    cout<<"Now shop2 has unsubscribed "<<endl;
+    product.ChangePrice(20);
+    return 0;
+}

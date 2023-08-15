@@ -1,0 +1,231 @@
+#include<stdio.h>
+
+#include<sys/stat.h>
+
+#include<fcntl.h>
+
+#include<semaphore.h>
+
+#include<unistd.h>
+
+#include<stdlib.h>
+
+#include<pthread.h>
+
+#include<string.h>
+
+int flags,sval, ret;
+
+int shared_var = 40;
+
+unsigned int value=2;
+
+sem_t sem;
+
+pthread_t tid1,tid2,tid3;
+
+
+
+void* process1(void* arg){
+
+	printf("\nEntered in process1\n");
+
+	sem_getvalue(&sem,&sval);
+
+	printf("\n in process1: before sem_wait() semaphore value=(%d)\n",sval);
+
+	ret = sem_wait(&sem);
+
+	
+
+	if(ret!=0){
+
+		printf("failure");
+
+	}
+
+	sem_getvalue(&sem,&sval);
+
+	printf("\n in process1: after sem_wait() semaphore value=(%d)\n",sval);
+
+	printf("\n process 1:Executing critical section\n");
+
+	//shared_var = shared_var - 5;
+
+	sleep(10);
+
+	//printf("process1: shared_var value: %d", shared_var);
+
+	printf("\nprocess 1:critical section executed\n");
+
+	sem_post(&sem);
+
+	 
+
+	sem_getvalue(&sem,&sval);
+
+	printf("\n in process1: after sem_post() semaphore value=(%d)\n",sval);
+
+	printf("\nExiting process1\n");
+
+	sem_close(&sem);
+
+	return NULL;	
+
+}
+
+
+
+void* process2(void* arg){
+
+	printf("\nEntered in process2\n");
+
+	sem_getvalue (&sem, &sval);
+
+	printf ("\n in process2: before sem_wait () semaphore value=(%d)\n",sval);
+
+	ret=sem_wait(&sem);
+
+	if(ret!=0){
+
+		printf("failure");
+
+	}
+
+	sem_getvalue (&sem, &sval);
+
+	printf ("\n in process2: after sem_wait () semaphore value=(%d)\n",sval);
+
+	printf ("\n process 2: Executing critical section\n");
+
+	sleep (10);
+
+	//shared_var = shared_var - 5;
+
+	//printf("process2: shared_var value: %d", shared_var);
+
+	printf("\n process 2: critical section executed\n");
+
+	sem_post(&sem);
+
+	sem_getvalue (&sem, &sval);
+
+	printf ("\n in process2: after sem_post () semaphore value=(%d)\n",sval);
+
+	sem_close(&sem);
+
+	printf("\nExiting process2\n");
+
+	return NULL;
+
+	
+
+}
+
+
+
+void* process3(void* arg){
+
+	printf("\nEntered in process3\n");
+
+	sem_getvalue (&sem, &sval);
+
+	printf ("\n in process3: before sem_wait () semaphore value=(%d)\n",sval);
+
+	ret=sem_wait(&sem);
+
+	if(ret!=0){
+
+		printf("failure");
+
+	}
+
+	sem_getvalue (&sem, &sval);
+
+	printf ("\n in process3: after sem_wait () semaphore value=(%d)\n",sval);
+
+	printf ("\n process 3: Executing critical section\n");
+
+	sleep (10);
+
+	//shared_var = shared_var - 5;
+
+	//printf("process3: shared_var value: %d", shared_var);
+
+	printf("\n process 3: critical section executed\n");
+
+	sem_post(&sem);
+
+	sem_getvalue (&sem, &sval);
+
+	printf ("\n in process3: after sem_post () semaphore value=(%d)\n",sval);
+
+	//sem_close(sem);
+
+	printf("\nExiting process3\n");
+
+	sem_close(&sem);
+
+	return NULL;
+
+}
+
+
+
+int main(){
+
+	
+
+	int retval1, retval2, retval3;
+
+	
+
+	sem_init(&sem,0,2);
+
+	
+
+	retval1 = pthread_create(&tid1, NULL, process1, NULL);
+
+	if(retval1!=0){
+
+	printf("\nThread1 can't be created : [%s]", strerror(retval1));
+
+	}
+
+	
+
+	retval2 = pthread_create(&tid2, NULL, process2, NULL);
+
+	if(retval3!=0){
+
+	printf("\nThread2 can't be created : [%s]", strerror(retval2));
+
+	}
+
+	
+
+	retval3 = pthread_create(&tid3, NULL, process3, NULL);
+
+	if(retval3!=0){
+
+	printf("\nThread3 can't be created : [%s]", strerror(retval3));
+
+	}
+
+	
+
+	pthread_join(tid1,NULL);
+
+	pthread_join(tid2,NULL);
+
+	pthread_join(tid3,NULL);
+
+
+
+
+
+
+
+	return 0;
+
+}

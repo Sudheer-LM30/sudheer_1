@@ -1,0 +1,133 @@
+#include<stdio.h>
+
+#include<stdlib.h>
+
+#include<pthread.h>
+
+#include<unistd.h>
+
+#include<string.h>
+
+
+
+
+
+//DEFINE_MUTEX(lock);
+
+int shared_var = 40;
+
+pthread_t tid1, tid2, tid3;
+
+pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+
+
+
+void* thread1(){
+
+	printf("Thread1 is running\n");
+
+	pthread_mutex_lock(&lock);
+
+	printf("In thread1 shared_var current value: %d\n",shared_var);
+
+	sleep(3);
+
+	shared_var = shared_var - 5;
+
+	printf("After updation shared_var value by thread1: %d\n",shared_var);
+
+	pthread_mutex_unlock(&lock);
+
+	sleep(2);
+
+	printf("Thread1 finished\n");
+
+}
+
+void* thread2(){
+
+	printf("Thread2 is running\n");
+
+	pthread_mutex_lock(&lock);
+
+	printf("In thread2 shared_var current value: %d\n",shared_var);
+
+	sleep(2);
+
+	shared_var = shared_var - 5;
+
+	printf("After updation shared_var value by thread2: %d\n",shared_var);
+
+	pthread_mutex_unlock(&lock);
+
+	sleep(3);
+
+	printf("Thread2 finished\n");
+
+}
+
+void* thread3(){
+
+	printf("Thread3 is running\n");
+
+	pthread_mutex_lock(&lock);
+
+	printf("In thread3 shared_var current value: %d\n",shared_var);
+
+	sleep(3);
+
+	shared_var = shared_var - 5;
+
+	printf("After updation shared_var value by thread3: %d\n",shared_var);
+
+	pthread_mutex_unlock(&lock);
+
+	sleep(2);
+
+	printf("Thread3 finished\n");
+
+}
+
+
+
+int main(){
+
+	int retval1, retval2, retval3;
+
+	
+
+	retval1 = pthread_create(&tid1, NULL, &thread1, NULL);
+
+	if(retval1!=0){
+
+	printf("\nThread1 can't be created : [%s]", strerror(retval1));
+
+	}
+
+	retval2 = pthread_create(&tid2, NULL, &thread2, NULL);
+
+	if(retval3!=0){
+
+	printf("\nThread2 can't be created : [%s]", strerror(retval2));
+
+	}
+
+	retval3 = pthread_create(&tid3, NULL, &thread3, NULL);
+
+	if(retval3!=0){
+
+	printf("\nThread3 can't be created : [%s]", strerror(retval3));
+
+	}
+
+	pthread_join(tid1,NULL);
+
+	pthread_join(tid2,NULL);
+
+	pthread_join(tid3,NULL);
+
+	
+
+	return 0;
+
+}

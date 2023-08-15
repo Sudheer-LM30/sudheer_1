@@ -1,0 +1,271 @@
+1.Features of c++:
+ .simple
+ .case sensitive
+ .portable- the same programs can be run in any other platforms.
+ .structured- we can divide the program in to several parts using functions.
+ .rich library- c++ provides alot of inbuilt functions like..
+  .<iostream>
+  .<cmath> etc..
+ .extensible- we can add new features in to the existing program.
+ .reusability- we can save the program parts in to library files and invoke them in different programs by simply including those library files.
+ .object oriented- we can use object oriented concepts like abstraction,encapsulation etc so that the development and maintenance will be easier.
+ .platform dependent- it means if we develop a program in windows ,we can run the same program in other platforms like linux,ubuntu
+
+                                                                OBJECT ORIENTED PROGRAMMING                                                       
+
+OBJECT ORIENTED PROGRAMMING:
+ -OBJECT ORIENTED PROGRAMMING IS ACTUALLY THE CONCEPT OF USING CLASSES AND OBJECTS IN PROGRAMMING, THE MAIN OBJECTIVE OF THIS CONCEPT IS TO IMPLEMENT THE REAL WORLD ENTITIES LIKE INHERITANCE,POLYMORPHISM ETC..
+ -USES:
+  -we can perform data hiding which is good for security concerns.
+  -so by using this oops concept we can create applications with less code and shorter development time.
+  
+15.OBJECT:
+  .object is nothing but an entity which have state and behaviour,
+  .so to access the members inside the class we need to create an object,
+  .Like that we can also create multiple objects for a single class.
+  
+16.CLASS:
+  .class is actually a user defined data type which contains data members and member functions,and it is also known as the blueprint of an object.
+     
+17.Initializer list:
+ 
+18.CONSTRUCTOR DELEGATION:
+ 
+ 
+  -CONSTRUCTOR:
+  .constuctor is actually a special method and it is automatically called when an object of the class is created.
+  .so to create a constructor we will use the same name as class name followed by parenthesis.
+  .used to initialize the data members of new objects.
+  .does not have return type.
+  
+ 
+
+  -DESTRUCTOR:
+  .DESTRUCTOR is actually a special member function which can do the opposite to constructors that is it can destroy the object.
+  .it actually starts with tilde symbol(~) and should not have any parameters.
+  .it is called when a function ends,program ends,or a group of local variables ends in a function,delete operator called.
+  .used to deallocate memory and cleans the objects and data members when the object is destroyed.
+  
+19.INHERITANCE: it is actually a process of getting the properties and behaviour from one class to a another class.
+    USES:
+    -we can reuse the code from existing class methods and fields in to the new class.
+	Types:
+	.single inheritance
+	.multilevel inheritance
+	.multiple inheritance
+	.heirarical inheritance
+	.hybrid inheritance.
+	
+20.POLYMORPHISM: it is actually concept that allows you to perform a single action in many ways.
+   -compile time polymorphism
+    ->achieved through function overloading- through different numbers of arguments or different types of arguments ,
+	->operator overloading- we have operators to perform operations on predefined datatypes like int,float etc.operator overloading is nothing but using an operator instead of function to do operations on user defined datatypes.
+	 .unary operator overloading
+	 .binary operator overloading
+   -runtime polymorphism
+   ->method overriding(virtual function): it allows you to redefine the parent class method in the child class based on its requirement.
+ 
+21.ABSTRACTION: it means displaying only the essential information and hiding the implementation details.
+ -USES:
+  .Here the data members and member funtions can only be manageable by us,and no one else can.
+  .It makes the application secure by not allowing anyone to see the background details.
+  .it increases the reusability of the code
+  .avoid duplication of the code.
+  -TYPES:
+   .ABSTRACTION using classes.-it is used to group all the data members and member functions in the single unit by using access specifiers.
+                              -Here a class can decide which data members will be displayed to outside or which is not.
+   .ABSTRACTION using header files.-we are using the header files without knowing the its implementations.
+   
+  -Data Hiding: it means it is a concept of hiding the data from the user to avoid any accidentalchanges.
+   
+22.ENCAPSULATION: The process of binding the data members and member functions with in a single unit is called encapsulation.
+  -It is a way to achieve the data hiding because other classes will not be able to access the data through private data members.
+  -In encapsulation,we can hide the data internal information ,which is better for security concerns.
+  -by encapsulation,we can make the class read only.
+  
+23.Type Casting:converting the expression of given data type into another data type is called type casting.
+  
+   TYPES:
+   
+   1.Implicit type conversion
+     -It is automatically performed  by the compiler itself to ensure that the calculations between same data types takesplace.
+     -such type of conversions takesplace when more than one data type is present in ana expression.
+	 -so here there is a rule which involves upgrading the lowest data type to largest datatype in the expression.
+	 -it avoids data loss
+	 -> bool <char <short int <int <unsigned int <long <unsigned <long long <float <double <long double.
+	 
+   2.explicit types conversion
+     -it is nothing but user defined type casting ,here the user typecast the result to make the particular data type
+	 -it is also known as forceful casting
+	 -it leads to data loss
+	 
+	 Types:
+	 
+	 1.CONVERSION BY ASSIGNMENT:This is done by explicitly using syntax by defining the required type in front of the expression in parenthesis.
+	   
+	   SYNTAX:(type) expression
+	   
+	 2.conversion using cast operator: A cast operator is a unary operator which forcefully converts one datatype to other.
+	   
+	   .static cast-It performs implicit conversions between types.
+	        USES: 1.Actually c style cast is hard to find in the code,so we can search using static_cast keyword.
+	   
+	   .dynamic cast- It is used mainly for safe downcasting at runtime.so to work on dynamic cast ,a virtual function should be there in a base class,because it only works with polymorphic class.
+	     -it performs conversions on class pointers and references,
+	     -it is a run time cast operator.
+	     -if casting fails it returns NULL value.
+		(NOTE:DOWNCASTING IS NOTHING BUT CASTING A POINTER OR REFERENCE OF BASE CLASS TO DERIVED CLASS.UPCASTING =OPPOSITE OF DOWNCASTING) 
+	   
+	   .const cast
+	   
+	   .reinterpret cast- It is used to convert pointer of some data type to pointer of  another data type.
+	        USES: 1.It is used when we want to work with bits.
+	              2.It is only used to typecast any pointer to its original type.
+			      3.If we use this type of cast then it becomes a non-portable product. So, it is suggested not to use this concept unless required.
+24.RTTI:
+				  
+25.TEMPLATES: A template is actually a powerful tool in c++,so here we are passing multiple data types in a parameter so that we don’t need to write the same code for different data types.
+	                      OR (BLUEPRINT OR FORMULA FOR CREATING A GENERIC CLASS OR FUNCTION.)
+						  (NOTE: generic type means having multiple datatypes in parameter)
+	TYPES:
+		1.FUNCTION TEMPLATES- Function templates are special functions that can operate with generic types.
+		2.CLASS TEMPLATES- class templates means we can have members that use template parameters as types.
+	USES:
+		1.We need not write many functions with same function body  for different datatypes.
+		2.It is used to pass data type as a parameter so that we don’t need to write same code again and again for different data types.
+		
+26.CONTAINERS: IT STORES OBJECTS AND DATA OR IT IS A HOLDER OBJECT THAT STORES A COLLECTION OF OTHER OBJECTS.
+	TYPES: THERE ARE 3 TYPES OF CONTAINERS.
+	
+	* Sequential Containers: sequential containers means it allows us to store elements that can be accessed in sequential order.
+	1.Array - AN ARRAY IS NOTHING BUT A GROUP OF ELEMENTS OF SAME DATA TYPE WHICH IS STORED IN A CONTIGOUS MEMORY.
+		          .IT IS STATIC TYPE THAT MEANS THE MEMORY SHOULD BE ALLOCATED DURING THE INITIALIZATION.
+			*MEMBER FUNCTIONS IN ARRAY:
+				1.at()
+				2.get()
+				3.operator[]
+				4.front()
+				5.back()
+				6.size()
+				7.max_size()
+				8.swap()
+				9.empty()
+				10.fill()
+				
+        2.Vector- A VECTOR IS ACTUALLY A SEQUENCE CONTAINER WHICH IMPLEMENTS A DYNAMIC ARRAY WHICH MEANS THE SIZE CAN BE CHANGED DURING RUNTIME.
+		          .IT STORES ELEMENTS IN CONTIGUOUS MEMORY LOCATIONS.
+			*MEMBER FUNCTIONS OF VECTOR:
+				1.MODIFIERS
+				2.ITERATORS
+				3.CAPACITY
+				
+	3.List  - LIST IS ACTUALLY A SEQUENCE CONTAINER WHICH ALLOWS NON CONTIGUOS MEMORY ALLOCATION.
+		.IT  HAS SLOW TRAVERSAL WHEN WE COMPARED TO ARRAY OR VECTOR,BUT ONCE A POSITION HAS BEEN FOUND,THE INSERTION AND DELETION WOULD BE EASY IN LISTS.
+		
+        //4.Deque
+	  
+	//5.Forward List
+		
+	* Associative Containers: Associative containers allow us to store elements in sorted order. The order doesn't depend upon when the element is inserted.
+	1.Set   - SETS ARE A TYPE OF ASSOCIATIVE CONTAINER IN WHICH EACH ELEMENT HAS TO BE UNIQUE BECAUSE THE VALUE OF THE ELEMENT IDENTIFIES IT. 
+		          . THE VALUES ARE STORED IN A SPECIFIC SORTED ORDER I.E. EITHER ASCENDING OR DESCENDING.
+				  
+        2.Map   - Maps are associative containers that store elements in a mapped fashion i.e key value pair.
+                  . Each element has a key value and a mapped value.
+				  . No two mapped values can have the same key values.
+	//3.Multiset
+	//4.Multimap
+		
+	* Unordered Associative Containers: It actually provides the unsorted versions of the associative container.
+	  //1.Unordered Set
+	  //2.Unordered Map
+	  //3.Unordered Multiset
+	  //4.Unordered Multimap
+		
+   	*Container Adapters: Container Adapters means it takes an existing STL container and provide a restricted interface to make them behave differently.
+	  //1.Stack
+	  //2.Queue
+	  //3.Priority Queue
+
+27.SMART POINTERS: SMART POINTERS ARE USED TO RELEASE THE MEMORY OF THE UNUSED REOURSES.
+                  .IT CAN DEALLOCATE AND FREE DESTROYED OBJECTS MEMORY.
+	- THERE ARE  3 TYPES OF POINTERS:
+	 1.UNIQUE_POINTER - THIS TYPE OF OBJECT STORES ONLY A SINGLE OBJECT. TO ASSIGN A DIFFERENT OBJECT, CURRENT OBJECT IS DEALLOCATED.
+	 
+	 2.SHARED_POINTER -THIS TYPE OF OBJECT CAN STORE MULTIPLE POINTERS AT A TIME.
+	                  .AND ALSO IT WILL MAINTAIN THE REFERENCE COUNT USING USE_COUNT METHOD.
+			NOTE: THE REFERENCE COUNTER WILL HOLD THE COUNT OF POINTERS POINTING TO THAT MEMORY LOCATION.
+					  
+	 3.WEAK_POINTER - IT’S MUCH MORE SIMILAR TO SHARED_PTR EXCEPT IT’LL NOT MAINTAIN A REFERENCE COUNTER.
+					.A POINTER WILL NOT HAVE A STRONGHOLD ON THE OBJECT. 
+					.THE REASON IS IF SUPPOSE POINTERS ARE HOLDING THE OBJECT AND REQUESTING FOR OTHER OBJECTS THEN THEY MAY FORM A DEADLOCK.
+					
+28.LAMBDA EXPRESSIONS: LAMBDA EXPRESSIONS ARE ACTUALLY INLINE FUNCTIONS WHICH ARE  USED FOR SHORT SNIPPETS OF CODE THAT ARE NOT GOING TO BE REUSED AND THEREFORE DO NOT REQUIRE A NAME.
+
+					  .AND ALSO THE RETURN TYPE IS EVALUATED BY THE COMPILER ITSELF,WE DONT NEED TO DO IT EXPLICITLY,BUT IN SOME SITUATIONS WE SHOULD INCLUDE THE RETURN TYPE.
+					 
+					  SYNTAX:
+					  
+					  [CAPTURE CLAUSE](PARAMETERS)->RETURN TYPE{
+					  
+					  }
+					  
+					  BENEFITS:
+					  
+					  1.IT REDUCES CODE LENGTH.
+					  2.AND ALSO IT OCCUPIES LESS MEMORY.
+	EG:
+	1.LAMBDA_CAPTURE_VALUES:
+	
+		#include<iostream>
+		using namespace std;
+
+		int main() {
+
+			int x = 100;
+			auto y = [x] (int num) {
+				return x + num;
+		};
+
+		int z = y(78);
+		cout <<z;
+
+		return 0;
+		}
+		
+	2.LAMBDA_CAPTURE_REFERENCE:
+		#include <iostream>
+		using namespace std;
+
+		int main() {
+
+		int num1 = 0;
+		auto num2 = [&num1] () {
+			num1++;
+		};
+		num2();
+
+		cout << num1 << endl;
+
+		return 0;
+		}
+
+	3.LAMBDA_USING_VECTOR:
+		#include <iostream>
+		#include <vector>
+		#include <algorithm>
+
+		using namespace std;
+
+		int main() {
+		vector<int> nums = {1, 2, 3, 4, 5, 8, 10, 12};
+		int even_count = count_if(nums.begin(), nums.end(), [](int num) {
+			return num % 2 == 0;
+		});
+		cout << even_count;
+		return 0;
+		}
+		
+29.REGULAR EXPRESSIONS: REGULAR EXPRESSIONS ARE A STANDARDIZED WAY TO EXPRESS PATTERNS TO BE MATCHED AGAINST SEQUENCES OF CHARACTERS.
+						.IT IS MAINLY USEFUL FOR DEFINING FILTERS.
+						

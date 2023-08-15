@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
+
+void *thread1(void *arg)
+{
+    printf("Thread 1: Starting\n");
+    sleep(1);
+    printf("Thread 1: After sleep\n");
+    return NULL;
+}
+
+void *thread2(void *arg)
+{
+    printf("Thread 2: Starting\n");
+    sleep(2);
+    printf("Thread 2: After sleep\n");
+    return NULL;
+}
+
+void *thread3(void *arg)
+{
+    printf("Thread 3: Starting\n");
+    sleep(3);
+    printf("Thread 3: After sleep\n");
+    return NULL;
+}
+
+int main(int argc , char *argv[])
+{
+    pthread_t t1, t2, t3;
+
+    pthread_create(&t1, NULL, thread1, NULL);
+    pthread_create(&t2, NULL, thread2, NULL);
+    pthread_create(&t3, NULL, thread3, NULL);
+
+    pthread_join(t1, NULL);
+    pthread_join(t2, NULL);
+    pthread_join(t3, NULL);
+
+    return 0;
+}

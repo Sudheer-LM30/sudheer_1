@@ -1,0 +1,170 @@
+31. THREADS: A THREAD IS NOTHING BUT A CLASS WHICH REPRESENTS THE INDIVIDUAL THREADS OF EXECUTION.
+	    .MULTI THREADING MEANS THE PROGRAM that has MULTIPLE PARTS WHICH CAN RUN CONCURRENTLY i.e SAME TIME 
+			
+			CALLABLE OBJECTS:
+			
+			1.FUNCTION POINTER
+			
+			#include<iostream>
+			#include<thread>
+			using namespace std;
+			void func(int x){
+				while(x++<10){
+					cout<<x<<endl;
+				}
+			}
+			int main(){
+				thread t1(func,0);
+				t1.join();
+				return 0;
+			}
+			2.LAMBDA EXPRESSIONS
+			
+			#include<iostream>
+			#include<thread>
+			using namespace std;
+
+			int main(){
+				auto lambda=[](int x){
+					while(x++<10){
+						cout<<x<<endl;
+				}
+				};
+				thread t1(lambda,0);
+				t1.join();
+				return 0;
+			}
+			3.FUNCTORS
+			
+			#include<iostream>
+			#include<thread>
+			using namespace std;
+			class base{
+				public:
+				void operator ()(int x){
+					while(x++<10){
+						cout<<x<<endl;
+					}
+				}
+			};
+			int main(){
+				thread t1((base()),0);
+				t1.join();
+				return 0;
+			}
+			4.NON-STATIC MEMBER FUNCTIONS
+			
+			#include<iostream>
+			#include<thread>
+			using namespace std;
+			class base{
+				public:
+				void func(int x){
+					while(x++<10){
+						cout<<x<<endl;
+					}
+				}
+			};
+			int main(){
+				base obj;
+				thread t1(&base::func,&obj,0);
+				t1.join();
+				return 0;
+			}
+			5.STATIC MEMBER FUNCTIONS
+			
+			#include<iostream>
+			#include<thread>
+			using namespace std;
+			class base{
+				public:
+				static void func(int x){
+					while(x++<10){
+						cout<<x<<endl;
+					}
+				}
+			};
+			int main(){
+				thread t1(&base::func,0);
+				t1.join();
+				return 0;
+			}
+
+32. SEMAPHORES: SEMAPHORE IS NOTHING BUT A TECHNIQUE TO MANAGE CONCURRENT PROCESSES BY USING SOME INTEGER VALUES.
+		.THERE ARE 2 TYPES OF SEMAPHORES:
+			1.BINARY SEMAPHORE (MUTEX LOCK)- multiple threads can take turns sharing the same resource, such as file,data base.
+							.AND WE USE MUTEX LOCK TO AVOID THE RACE CONDITION
+							.RACE CONDITION IS NOTHING BUT TWO OR MORE THREADS TRYING TO MODIFY THE SAME VALUE.
+
+______________________________________________________________________________________________________________________________________________________________________________________________________________
+
+CODE:
+
+#include<iostream>
+#include<thread>
+using namespace std;
+int x=0;
+void program(){
+    x++;
+}
+int main(){
+    thread t1(program);
+    thread t2(program);
+    t1.join();
+    t2.join();
+    cout<<x;
+    return 0;
+}
+
+________________________________________________________________________________________________________________________________________________________________________________________________________
+				
+*DEADLOCK: Deadlock is situation in an operating system where multiple processes residing in the memory doesn't able to perform their execution,
+	because the resources which are needed for program execution is being hold by another resource 
+	who is waiting for some other resource for completion.
+
+_______________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+CODE:
+
+#include<iostream>
+#include<mutex>
+#include<thread>
+using namespace std;
+mutex m1;
+mutex m2;
+void func1(){
+    m1.lock();
+    //std::this_thread::sleep_for(std::chrono::seconds(1));
+    m2.lock();
+    cout<<"dead lock 1"<<endl;
+    m1.unlock();
+    m2.unlock();
+}
+void func2(){
+    m2.lock();
+    //std::this_thread::sleep_for(std::chrono::seconds(1));
+    m1.lock();
+    cout<<"dead lock 2"<<endl;
+    m2.unlock();
+    m1.unlock();
+}
+int main(){
+    thread t1(func1);
+    thread t2(func2);
+    t1.join();
+    t2.join();
+    return 0;
+}
+
+________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+	
+
+	2.COUNTING SEMAPHORE- Its value can range over an unrestricted domain. It is used to control access to a resource WHICH has multiple instances.
+
+33.SIGNALS: SIGNALS ARE NOTHING BUT SOME INTERRUPTIONS DELIVERED TO A PROCESS BY THE OPERATING SYSTEM WHICH CAN BE RESULT IN THE PROGRAM TERMINATION.
+           WE CAN CATCH THESE INTERRUPTIONS BY USING VARIOUS SIGNALS ALONG WITH THEIR OPERATIONS AND SIGNAL() FUNCTION.
+	   WE CAN GENERATE INTERRUPTS BY PRESSING CTRL+C.
+	   THERE ARE SOME SIGNALS THAT WE CAN CATCH IN OUR PROGRAM AND CAN TAKE SOME APPROPRIATE ACTIONS BASED ON THE SIGNAL.
+		.SIGTERM- IT SENDS A TERMINATION REQUEST TO THE PROGRAM
+		.SIGILL- IT DETECTS AN ILLEGAL COMMAND
+		LIKE THAT WE HAVE SOME MORE SIGNALS.
