@@ -1,0 +1,4 @@
+sudo apt update ->Update the system data
+apt list --upgradable ->Shows all packages that needs to be upgraded
+sudo apt install git ->To install git
+
