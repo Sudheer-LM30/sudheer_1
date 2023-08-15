@@ -1,4 +1,8 @@
 sudo apt update ->Update the system data
 apt list --upgradable ->Shows all packages that needs to be upgraded
 sudo apt install git ->To install git
+git status ->checks the status of git
+git init ->initializes the folder to the git
+git add filename ->add file to the git
+git add . ->add all the files to the git
 
