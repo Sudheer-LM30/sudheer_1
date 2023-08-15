@@ -1,0 +1,14 @@
+👉️Pushing Files From Linux Folder To Git
+git status ->checks the status of git
+git init ->initializes the folder to the git
+note:To create text file use the following command "touch filename.txt" then edit and save.
+git add filename ->add file to the git
+git add . ->add all the files to the git
+git commit -m "any message" ->to commit the files in the folder
+git config --global user.name "username"
+git config --global user.email "email"
+note:Give user name and password if you are committing first time, then check if it taken our username and password by using "git config user.name" and "git config user.email" then commmit again.
+add remote origin which is in your github account repository
+git push -u origin master
+Give username and password
+note:For password create tokens in the github and paste.
