@@ -68,7 +68,7 @@ TABLE OF CONTENT: -
 	->OBSERVER
 15	ADVANCED CONCEPTS
     A.THREADS
-	  ->can create using function pointer, functors, lambda, non static, and static.
+	  ->Ways to create a thread: function pointer, functors, lambda, non static, and static.
 	  ->join, detach, and joinable.
 	  ->mutex, lock and unlock, mutex::try_lock.
 	->DEADLOCK
