@@ -1,7 +1,7 @@
 31. THREADS: A THREAD IS NOTHING BUT A CLASS WHICH REPRESENTS THE INDIVIDUAL THREADS OF EXECUTION.
 	    .MULTI THREADING MEANS THE PROGRAM that has MULTIPLE PARTS WHICH CAN RUN CONCURRENTLY i.e SAME TIME 
 			
-			CALLABLE OBJECTS:
+			CALLABLE OBJECTS(ways to create a thread):
 			
 			1.FUNCTION POINTER
 			
@@ -95,34 +95,12 @@
 			1.BINARY SEMAPHORE (MUTEX LOCK)- multiple threads can take turns sharing the same resource, such as file,data base.
 							.AND WE USE MUTEX LOCK TO AVOID THE RACE CONDITION
 							.RACE CONDITION IS NOTHING BUT TWO OR MORE THREADS TRYING TO MODIFY THE SAME VALUE.
-
-______________________________________________________________________________________________________________________________________________________________________________________________________________
-
-CODE:
-
-#include<iostream>
-#include<thread>
-using namespace std;
-int x=0;
-void program(){
-    x++;
-}
-int main(){
-    thread t1(program);
-    thread t2(program);
-    t1.join();
-    t2.join();
-    cout<<x;
-    return 0;
-}
-
+			2.COUNTING SEMAPHORE
 ________________________________________________________________________________________________________________________________________________________________________________________________________
 				
 *DEADLOCK: Deadlock is situation in an operating system where multiple processes residing in the memory doesn't able to perform their execution,
 	because the resources which are needed for program execution is being hold by another resource 
 	who is waiting for some other resource for completion.
-
-_______________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 CODE:
 
@@ -155,11 +133,6 @@ int main(){
     t2.join();
     return 0;
 }
-
-________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-	
-
-	2.COUNTING SEMAPHORE- Its value can range over an unrestricted domain. It is used to control access to a resource WHICH has multiple instances.
 
 33.SIGNALS: SIGNALS ARE NOTHING BUT SOME INTERRUPTIONS DELIVERED TO A PROCESS BY THE OPERATING SYSTEM WHICH CAN BE RESULT IN THE PROGRAM TERMINATION.
            WE CAN CATCH THESE INTERRUPTIONS BY USING VARIOUS SIGNALS ALONG WITH THEIR OPERATIONS AND SIGNAL() FUNCTION.
