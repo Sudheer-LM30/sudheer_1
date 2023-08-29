@@ -67,7 +67,10 @@ TABLE OF CONTENT: -
 	->ABSTRACT FACTORY METHOD
 	->OBSERVER
 15	ADVANCED CONCEPTS
-    ->THREADS
+    A.THREADS
+	  ->can create using function pointer, functors, lambda, non static, and static.
+	  ->join, detach, and joinable.
+	  ->mutex, lock and unlock, mutex::try_lock.
 	->DEADLOCK
 	->SEMAPHORE
 	->SIGNAL HANDLING

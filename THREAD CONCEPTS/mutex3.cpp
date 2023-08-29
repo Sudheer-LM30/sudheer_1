@@ -2,29 +2,29 @@
 #include<thread>
 #include<mutex>
 using namespace std;
-    std::mutex mtx;
 
-void myMethod1 () {
+mutex m;
 
-    mtx.lock();
-    int x=0;
-    for (int z=0; z< 10; ++z) {
-        
+void myMethod1 (int x) {
+
+    m.lock();
+   
         if (x==0){
             cout<<"zero"<<endl;
         }else{
             cout<<"not zero"<<endl;
         }
-        cout<< z;
+        cout<< x;
         cout<< '\n';
-    }
-    mtx.unlock();
+    
+    m.unlock();
 }
 int main ()
 {
-    thread thread1(myMethod1,10);
-    thread thread2(myMethod1,20);
-    thread1.join();
-    thread2.join();
+    thread t1(myMethod1,0);
+    thread t2(myMethod1,20);
+
+    t1.join();
+    t2.join();
     return 0;
 }

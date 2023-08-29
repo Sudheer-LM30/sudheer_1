@@ -8,7 +8,7 @@ mutex m;
 void print_block (int n, char c) {
   m.lock();
   for (int i=0; i<n; ++i){
-     std::cout << c; 
+    cout << c; 
   }
   cout << '\n';
   m.unlock();
